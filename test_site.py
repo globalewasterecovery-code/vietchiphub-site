@@ -29,6 +29,9 @@ assert '"@type":"TechArticle"' in memory
 assert "Không công bố tồn kho giả" in memory
 assert (root/"bo-nho/ddr5-rdimm-ecc/index.html").exists()
 opportunity = (root/"linh-kien/module-igbt-cong-nghiep/index.html").read_text()
-assert "Tổng chi phí về Việt Nam" in opportunity
-assert "Không cam kết chênh lệch cố định" in opportunity
+assert "Báo giá theo yêu cầu" in opportunity
+assert "Gửi yêu cầu để nhận phản hồi phù hợp" in opportunity
+public_text = "\n".join(page.read_text(encoding="utf-8") for page in pages)
+for secret_term in ("Nguồn cung Trung Quốc", "chênh lệch giá", "hai thị trường", "landed cost", "arbitrage"):
+    assert secret_term.lower() not in public_text.lower(), secret_term
 print(f"PASS pages={len(pages)} sitemap_urls={sitemap.count('<url>')}")
