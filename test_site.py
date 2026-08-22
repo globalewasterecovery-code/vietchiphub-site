@@ -3,7 +3,7 @@ import re
 
 root = Path(__file__).parent / "public"
 pages = list(root.glob("**/index.html"))
-assert len(pages) >= 80, len(pages)
+assert len(pages) >= 93, len(pages)
 for page in pages:
     text = page.read_text(encoding="utf-8")
     if "thank-you" in page.parts:
@@ -15,7 +15,7 @@ for page in pages:
     assert 'name="viewport"' in text
 assert (root/"robots.txt").exists()
 sitemap = (root/"sitemap.xml").read_text()
-assert sitemap.count("<url>") >= 77
+assert sitemap.count("<url>") >= 90
 assert len(re.findall(r'<h1>', (root/"index.html").read_text())) == 1
 assert '<html lang="vi">' in (root/"index.html").read_text()
 assert '<html lang="en">' in (root/"en/index.html").read_text()
@@ -28,4 +28,7 @@ memory = (root/"bo-nho/index.html").read_text()
 assert '"@type":"TechArticle"' in memory
 assert "Không công bố tồn kho giả" in memory
 assert (root/"bo-nho/ddr5-rdimm-ecc/index.html").exists()
+opportunity = (root/"linh-kien/module-igbt-cong-nghiep/index.html").read_text()
+assert "Tổng chi phí về Việt Nam" in opportunity
+assert "Không cam kết chênh lệch cố định" in opportunity
 print(f"PASS pages={len(pages)} sitemap_urls={sitemap.count('<url>')}")
