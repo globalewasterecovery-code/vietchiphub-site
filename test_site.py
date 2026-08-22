@@ -3,7 +3,7 @@ import re
 
 root = Path(__file__).parent / "public"
 pages = list(root.glob("**/index.html"))
-assert len(pages) >= 93, len(pages)
+assert len(pages) >= 94, len(pages)
 for page in pages:
     text = page.read_text(encoding="utf-8")
     if "thank-you" in page.parts:
@@ -15,7 +15,7 @@ for page in pages:
     assert 'name="viewport"' in text
 assert (root/"robots.txt").exists()
 sitemap = (root/"sitemap.xml").read_text()
-assert sitemap.count("<url>") >= 90
+assert sitemap.count("<url>") >= 91
 assert len(re.findall(r'<h1>', (root/"index.html").read_text())) == 1
 assert '<html lang="vi">' in (root/"index.html").read_text()
 assert '<html lang="en">' in (root/"en/index.html").read_text()
@@ -34,4 +34,8 @@ assert "Gửi yêu cầu để nhận phản hồi phù hợp" in opportunity
 public_text = "\n".join(page.read_text(encoding="utf-8") for page in pages)
 for secret_term in ("Nguồn cung Trung Quốc", "chênh lệch giá", "hai thị trường", "landed cost", "arbitrage"):
     assert secret_term.lower() not in public_text.lower(), secret_term
+hub = (root/"linh-kien/index.html").read_text()
+assert hub.count('/linh-kien/') >= 13
+home = (root/"index.html").read_text()
+assert '/bo-nho/' in home and '/linh-kien/' in home and '/chip-thieu-hang/' in home
 print(f"PASS pages={len(pages)} sitemap_urls={sitemap.count('<url>')}")
