@@ -3,7 +3,7 @@ import re
 
 root = Path(__file__).parent / "public"
 pages = list(root.glob("**/index.html"))
-assert len(pages) >= 58, len(pages)
+assert len(pages) >= 80, len(pages)
 for page in pages:
     text = page.read_text(encoding="utf-8")
     if "thank-you" in page.parts:
@@ -15,7 +15,7 @@ for page in pages:
     assert 'name="viewport"' in text
 assert (root/"robots.txt").exists()
 sitemap = (root/"sitemap.xml").read_text()
-assert sitemap.count("<url>") >= 67
+assert sitemap.count("<url>") >= 77
 assert len(re.findall(r'<h1>', (root/"index.html").read_text())) == 1
 assert '<html lang="vi">' in (root/"index.html").read_text()
 assert '<html lang="en">' in (root/"en/index.html").read_text()
@@ -24,4 +24,8 @@ assert '"@type":"Product"' in (root/"chip/stm32f103c8t6/index.html").read_text()
 restricted = (root/"chip/nvidia-h100/index.html").read_text()
 assert "Kiểm tra tuân thủ bắt buộc" in restricted
 assert "né tránh giấy phép" in restricted
+memory = (root/"bo-nho/index.html").read_text()
+assert '"@type":"TechArticle"' in memory
+assert "Không công bố tồn kho giả" in memory
+assert (root/"bo-nho/ddr5-rdimm-ecc/index.html").exists()
 print(f"PASS pages={len(pages)} sitemap_urls={sitemap.count('<url>')}")
