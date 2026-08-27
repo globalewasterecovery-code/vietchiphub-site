@@ -241,10 +241,22 @@ def sourcing_hub():
     return f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linh kiện điện tử và module công nghiệp Việt Nam | VN Electronics Hub</title><meta name="description" content="Tìm chip, IGBT, SiC, IPM, MCU ô tô, DSP, module 4G, GNSS, FPGA, PLC và bo mạch công nghiệp tại Việt Nam."><link rel="canonical" href="{canonical}"><script type="application/ld+json">{schema}</script><link rel="stylesheet" href="/assets/site.css"></head><body>{top}{body}{footer()}</body></html>'''
 
 def build():
+    # 修复：build() 会整体 rmtree(OUT) 再纯用 Python 数据结构重建，
+    # 这会把手工添加、不在任何数据列表里的静态资源（例如联系方式二维码图片）
+    # 一并删掉。这里在 rmtree 之前先备份 assets/contact/，重建后立即还原。
+    import tempfile
+    contact_src = OUT / "assets" / "contact"
+    contact_backup = None
+    if contact_src.exists():
+        contact_backup = Path(tempfile.mkdtemp(prefix="vietchiphub_contact_backup_"))
+        shutil.copytree(contact_src, contact_backup / "contact")
     if OUT.exists():
         shutil.rmtree(OUT)
     (OUT/"assets").mkdir(parents=True,exist_ok=True)
     (OUT/"assets/site.css").write_text(CSS,encoding="utf-8")
+    if contact_backup is not None:
+        shutil.copytree(contact_backup / "contact", OUT / "assets" / "contact")
+        shutil.rmtree(contact_backup)
     for path,title,desc,heading in PAGES:
         target = OUT/"en" if not path else OUT/"en"/path
         target.mkdir(parents=True,exist_ok=True)
