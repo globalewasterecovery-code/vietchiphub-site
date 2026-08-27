@@ -1,2 +1,10 @@
 __pycache__/
 .netlify/
+AGENTS.md
+HEARTBEAT.md
+IDENTITY.md
+SOUL.md
+TOOLS.md
+USER.md
+BOOTSTRAP.md
+openclaw-workspace-state.json
