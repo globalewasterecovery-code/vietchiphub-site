@@ -1,0 +1,72 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cộng đồng | VN Electronics Hub</title><meta name="description" content="Đăng nhu cầu mua hàng, cung cấp linh kiện tồn kho hoặc đề xuất hợp tác trong cộng đồng VN Electronics Hub."><link rel="canonical" href="https://vietchiphub.com/cong-dong/"><link rel="stylesheet" href="/assets/site.css">
+<style>
+.community-wrap{padding:44px 0 64px}
+.community-wrap h1{margin:0 0 8px}
+.post-form{background:#fff;border:1px solid var(--line);border-radius:15px;padding:22px;box-shadow:0 9px 30px rgba(11,35,61,.05);display:grid;gap:12px;margin:24px 0 40px}
+.post-form input,.post-form textarea,.post-form select{width:100%;padding:12px;border-radius:8px;border:1px solid #b8c6d5;font:inherit}
+.post-form button{padding:12px;border-radius:8px;border:1px solid var(--blue);background:var(--blue);color:#fff;font-weight:750;cursor:pointer}
+.msg{font-size:.85rem;min-height:1.1em}
+.msg.err{color:#c0392b}
+.msg.ok{color:#1f8a4c}
+.post-item{border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:14px;background:#fff}
+.post-item h3{margin:0 0 6px}
+.post-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.tag-pill{font-size:.72rem;font-weight:750;color:var(--blue);background:#eaf1fc;padding:3px 9px;border-radius:999px}
+.post-body{white-space:pre-wrap;word-break:break-word;margin:0 0 10px}
+.post-meta{font-size:.8rem;color:var(--muted)}
+.post-actions{margin-left:8px}
+.post-action{background:none;border:none;color:var(--blue);font-weight:700;cursor:pointer;padding:0 4px;font-size:.8rem}
+.empty{color:var(--muted)}
+.login-hint{background:#fff9ec;border-left:4px solid var(--orange);padding:14px 16px;border-radius:5px;color:#5c4a23;margin:20px 0}
+</style>
+</head><body>
+<div class="top"><div class="wrap"><span>Vietnam electronics supply-chain platform</span><span id="authState">Đang tải…</span></div></div>
+<header class="wrap nav"><a class="brand" href="/"><i>VN</i> Electronics Hub</a><nav class="links"><a href="/components/">Components</a><a href="/bom-sourcing/">BOM Sourcing</a><a href="/factory-surplus/">Surplus</a><a href="/suppliers/">Suppliers</a><a href="/cong-dong/">Cộng đồng</a></nav><a class="btn" href="/rfq/">Submit RFQ</a></header>
+<main class="wrap community-wrap">
+  <div class="crumb"><a href="/">Trang chủ</a> / Cộng đồng</div>
+  <h1>Cộng đồng VN Electronics Hub</h1>
+  <p class="lead">Đăng nhu cầu mua hàng (cần mua), hàng tồn kho có thể cung cấp, hoặc đề xuất hợp tác với các nhà máy, nhà phân phối và kỹ sư khác trong ngành điện tử Việt Nam.</p>
+
+  <div id="loginHint" class="login-hint" style="display:none">Vui lòng <a href="/dang-nhap/">đăng nhập</a> hoặc <a href="/dang-ky/">đăng ký</a> để đăng tin.</div>
+
+  <form class="post-form" id="postForm">
+    <select id="postCategory" required>
+      <option value="">— Chọn loại tin —</option>
+      <option value="Cần mua">Cần mua (nhu cầu mua linh kiện / BOM)</option>
+      <option value="Cung cấp">Cung cấp (hàng tồn kho / linh kiện có sẵn)</option>
+      <option value="Hợp tác">Hợp tác (đề xuất hợp tác, phân phối, gia công)</option>
+    </select>
+    <input id="postTitle" type="text" maxlength="120" placeholder="Tiêu đề ngắn gọn (ví dụ: Cần 500pcs STM32F103C8T6)" />
+    <textarea id="postBody" rows="4" required placeholder="Mô tả chi tiết: mã linh kiện, số lượng, điều kiện, thời hạn, thông tin liên hệ…"></textarea>
+    <button type="submit">Đăng tin</button>
+    <p class="msg" id="postMsg"></p>
+  </form>
+
+  <div id="postList"><p class="empty">Đang tải…</p></div>
+</main>
+<footer><div class="wrap"><div class="brand"><i>VN</i> Electronics Hub</div><p>Kết nối nhu cầu mua hàng thực với nguồn cung điện tử tại Việt Nam.</p><div class="legal">© 2026 VN Electronics Hub</div></div></footer>
+<script type="module">
+  import { getSession, renderAuthState, fetchPosts, renderPostList, wirePostForm } from '/js/community.js';
+
+  const TARGET = 'cong-dong';
+
+  async function refreshList() {
+    const posts = await fetchPosts({ kind: 'board', target: TARGET, limit: 100 });
+    renderPostList('postList', posts, { emptyText: 'Chưa có tin nào. Hãy là người đầu tiên đăng.', showTitle: true });
+  }
+
+  async function main() {
+    const session = await renderAuthState('authState');
+    const form = document.getElementById('postForm');
+    const hint = document.getElementById('loginHint');
+    if (!session || !session.user) {
+      form.style.display = 'none';
+      hint.style.display = 'block';
+    }
+    wirePostForm({ formId: 'postForm', msgId: 'postMsg', kind: 'board', target: TARGET, onSuccess: refreshList });
+    await refreshList();
+  }
+
+  main();
+</script>
+</body></html>

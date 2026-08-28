@@ -1,0 +1,113 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Đăng ký | VN Electronics Hub</title><meta name="description" content="Đăng ký tài khoản VN Electronics Hub để đăng nhu cầu mua hàng, cung cấp linh kiện hoặc đề xuất hợp tác."><link rel="canonical" href="https://vietchiphub.com/dang-ky/"><link rel="stylesheet" href="/assets/site.css">
+<style>
+.auth-wrap{width:min(28rem,calc(100% - 36px));margin:0 auto;padding:56px 0}
+.auth-wrap h1{margin:0 0 8px}
+.auth-box{background:#fff;border:1px solid var(--line);border-radius:15px;padding:26px;box-shadow:0 9px 30px rgba(11,35,61,.05);display:grid;gap:12px}
+.auth-box input,.auth-box button{width:100%;padding:12px;border-radius:8px;border:1px solid #b8c6d5;font:inherit}
+.auth-box button[type=submit],.auth-box button.oauth{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:750;cursor:pointer}
+.auth-box button.oauth.alt{background:#fff;color:var(--ink);border-color:#b9c8d8}
+.auth-box .hint{font-size:.8rem;color:var(--muted)}
+.auth-box .msg{font-size:.85rem;min-height:1.1em}
+.auth-box .msg.err{color:#c0392b}
+.auth-box .msg.ok{color:#1f8a4c}
+.switch{font-size:.85rem;color:var(--muted);text-align:center}
+</style>
+</head><body>
+<div class="top"><div class="wrap"><span>Vietnam electronics supply-chain platform</span><span id="authState">Đang tải…</span></div></div>
+<header class="wrap nav"><a class="brand" href="/"><i>VN</i> Electronics Hub</a><nav class="links"><a href="/components/">Components</a><a href="/bom-sourcing/">BOM Sourcing</a><a href="/factory-surplus/">Surplus</a><a href="/suppliers/">Suppliers</a><a href="/cong-dong/">Cộng đồng</a></nav><a class="btn" href="/rfq/">Submit RFQ</a></header>
+<main class="auth-wrap">
+  <h1>Đăng ký</h1>
+  <p class="hint" style="margin-bottom:20px">Chỉ cần tên hiển thị và email xác nhận, không cần đặt mật khẩu.</p>
+  <div class="auth-box">
+    <button type="button" class="oauth" id="oauthGoogle">Tiếp tục với Google</button>
+    <button type="button" class="oauth alt" id="oauthApple">Tiếp tục với Apple</button>
+    <p class="msg" id="oauthMsg"></p>
+  </div>
+  <p class="hint" style="text-align:center;margin:16px 0">hoặc dùng mã xác nhận qua email</p>
+  <form class="auth-box" id="step1Form">
+    <div>
+      <label class="hint" for="displayName">Tên hiển thị</label>
+      <input id="displayName" name="displayName" type="text" required maxlength="40" />
+    </div>
+    <div>
+      <label class="hint" for="email">Email</label>
+      <input id="email" name="email" type="email" required />
+    </div>
+    <button type="submit" id="step1Btn">Gửi mã xác nhận</button>
+    <p class="msg" id="step1Msg"></p>
+  </form>
+  <form class="auth-box" id="step2Form" style="display:none;margin-top:12px">
+    <p class="hint">Mã xác nhận đã gửi tới email, có hiệu lực 5-10 phút.</p>
+    <div>
+      <label class="hint" for="code">Mã xác nhận</label>
+      <input id="code" name="code" type="text" inputmode="numeric" required maxlength="8" />
+    </div>
+    <button type="submit" id="step2Btn">Xác nhận và tham gia</button>
+    <p class="msg" id="step2Msg"></p>
+  </form>
+  <p class="switch" style="margin-top:14px">Đã có tài khoản? <a href="/dang-nhap/">Đăng nhập</a></p>
+</main>
+<footer><div class="wrap"><div class="brand"><i>VN</i> Electronics Hub</div><div class="legal">© 2026 VN Electronics Hub</div></div></footer>
+<script type="module">
+  import { supabase } from '/js/supabase-client.js';
+  import { renderAuthState } from '/js/community.js';
+  renderAuthState('authState').then((session) => {
+    if (session && session.user) { window.location.replace('/cong-dong/'); }
+  });
+  document.getElementById('oauthGoogle').addEventListener('click', () => oauthSignIn('google'));
+  document.getElementById('oauthApple').addEventListener('click', () => oauthSignIn('apple'));
+  async function oauthSignIn(provider) {
+    const msg = document.getElementById('oauthMsg');
+    msg.textContent = ''; msg.className = 'msg';
+    const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo: window.location.origin + '/cong-dong/' } });
+    if (error) { msg.textContent = 'Đăng nhập thất bại: ' + error.message; msg.className = 'msg err'; }
+  }
+
+  let pendingEmail = '';
+  const step1Form = document.getElementById('step1Form');
+  const step2Form = document.getElementById('step2Form');
+  const step1Msg = document.getElementById('step1Msg');
+  const step2Msg = document.getElementById('step2Msg');
+
+  step1Form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    step1Msg.textContent = ''; step1Msg.className = 'msg';
+    const btn = document.getElementById('step1Btn');
+    btn.disabled = true;
+    const displayName = document.getElementById('displayName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { shouldCreateUser: true, data: { display_name: displayName } },
+    });
+    btn.disabled = false;
+    if (error) {
+      step1Msg.textContent = 'Gửi thất bại: ' + error.message;
+      step1Msg.className = 'msg err';
+      return;
+    }
+    pendingEmail = email;
+    step1Msg.textContent = 'Đã gửi mã xác nhận, vui lòng kiểm tra email.';
+    step1Msg.className = 'msg ok';
+    step2Form.style.display = 'grid';
+  });
+
+  step2Form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    step2Msg.textContent = ''; step2Msg.className = 'msg';
+    const btn = document.getElementById('step2Btn');
+    btn.disabled = true;
+    const code = document.getElementById('code').value.trim();
+    const { error } = await supabase.auth.verifyOtp({ email: pendingEmail, token: code, type: 'email' });
+    btn.disabled = false;
+    if (error) {
+      step2Msg.textContent = 'Xác nhận thất bại: ' + error.message;
+      step2Msg.className = 'msg err';
+      return;
+    }
+    step2Msg.textContent = 'Tham gia thành công! Đang chuyển hướng…';
+    step2Msg.className = 'msg ok';
+    setTimeout(() => { window.location.href = '/cong-dong/'; }, 800);
+  });
+</script>
+</body></html>

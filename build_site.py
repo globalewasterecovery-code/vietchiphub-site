@@ -135,7 +135,7 @@ CARDS = [
 ]
 
 def nav():
-    return '<div class="top"><div class="wrap"><span>Vietnam electronics supply-chain platform</span><span>Buyer RFQ · Supplier inventory · Factory services</span></div></div><header class="wrap nav"><a class="brand" href="/"><i>VN</i> Electronics Hub</a><nav class="links"><a href="/components/">Components</a><a href="/bom-sourcing/">BOM Sourcing</a><a href="/factory-surplus/">Surplus</a><a href="/suppliers/">Suppliers</a><a href="/quality/">Quality</a></nav><a class="btn" href="/rfq/">Submit RFQ</a></header>'
+    return '<div class="top"><div class="wrap"><span>Vietnam electronics supply-chain platform</span><span>Buyer RFQ · Supplier inventory · Factory services</span></div></div><header class="wrap nav"><a class="brand" href="/"><i>VN</i> Electronics Hub</a><nav class="links"><a href="/components/">Components</a><a href="/bom-sourcing/">BOM Sourcing</a><a href="/factory-surplus/">Surplus</a><a href="/suppliers/">Suppliers</a><a href="/quality/">Quality</a><a href="https://vietchiphub.com/cong-dong/">Community</a></nav><a class="btn" href="/rfq/">Submit RFQ</a></header>'
 
 def footer():
     return f'''<footer><div class="wrap"><div class="foot-grid"><div><div class="brand"><i>VN</i> Electronics Hub</div><p>Connecting qualified demand with Vietnam's electronics supply chain.</p></div><div class="foot-links"><a href="/rfq/">Submit RFQ</a><a href="/suppliers/">List inventory</a><a href="/quality/">Quality process</a><a href="/contact/">Contact</a><a href="/about/">About</a><a href="/jobs/">Jobs</a></div></div><div class="legal">© {date.today().year} VN Electronics Hub. Independent B2B sourcing platform. Product availability and authenticity require supplier documentation and buyer verification.</div></div></footer>'''
@@ -167,7 +167,7 @@ def localized_page(lang, prefix, path, title, desc, heading):
     vi = lang == "vi"
     labels = ({
         "supply": "Chuỗi cung ứng điện tử Việt Nam", "home": "Trang chủ", "components": "Linh kiện",
-        "bom": "Tìm nguồn BOM", "surplus": "Hàng tồn kho", "suppliers": "Nhà cung cấp", "quality": "Chất lượng",
+        "bom": "Tìm nguồn BOM", "surplus": "Hàng tồn kho", "suppliers": "Nhà cung cấp", "quality": "Chất lượng", "community": "Cộng đồng",
         "rfq": "Gửi RFQ", "intro": "Kết nối nhu cầu mua hàng thực với nguồn cung Việt Nam bằng quy trình có hồ sơ và kiểm tra bằng chứng.",
         "start": "Gửi yêu cầu", "process": "Xem quy trình chất lượng", "need": "Thông tin người mua cần cung cấp",
         "needtext": "Hãng sản xuất, mã linh kiện chính xác, quy cách đóng gói, cấp chất lượng, số lượng, date code chấp nhận được, chứng từ, địa điểm giao hàng và thời hạn.",
@@ -176,7 +176,7 @@ def localized_page(lang, prefix, path, title, desc, heading):
         "formtitle": "Gửi yêu cầu đầy đủ", "company": "Tên công ty", "contact": "Email / WhatsApp / Zalo", "part": "Mã linh kiện / tên BOM", "qty": "Số lượng", "details": "Hãng, quy cách, date code, giá mục tiêu, nơi giao hàng và yêu cầu chứng từ", "send": "Gửi RFQ để kiểm tra thủ công",
         "disclaimer": "Không phát hành báo giá tự động. Đội ngũ sẽ kiểm tra yêu cầu và bằng chứng trước khi phản hồi.",
     } if vi else {
-        "supply": "越南电子供应链", "home": "首页", "components": "元器件", "bom": "BOM 配单", "surplus": "工厂库存", "suppliers": "供应商", "quality": "质量流程",
+        "supply": "越南电子供应链", "home": "首页", "components": "元器件", "bom": "BOM 配单", "surplus": "工厂库存", "suppliers": "供应商", "quality": "质量流程", "community": "社区",
         "rfq": "提交询价", "intro": "以保留原始需求和供应证据的方式，对接真实采购需求与越南电子供应链。",
         "start": "提交需求", "process": "查看质量流程", "need": "采购方需要提供", "needtext": "品牌、准确型号、封装、等级、数量、可接受批次、所需文件、交付城市和目标日期。",
         "warning": "技术与兼容信息仅用于寻源支持。采购方负责工程验证、检验和最终批准。",
@@ -189,7 +189,7 @@ def localized_page(lang, prefix, path, title, desc, heading):
     base = f"/{prefix}" if prefix else ""
     language = '<div class="top"><div class="wrap"><span>'+labels["supply"]+'</span><span><a href="'+('/'+path+'/' if path else '/')+'">VI</a> · <a href="/en/'+(path+'/' if path else '')+'">EN</a> · <a href="/zh/'+(path+'/' if path else '')+'">中文</a></span></div></div>'
     component_href = "/linh-kien/" if vi else f"{base}/components/"
-    header = f'''{language}<header class="wrap nav"><a class="brand" href="{base}/"><i>VN</i> Electronics Hub</a><nav class="links"><a href="{component_href}">{labels['components']}</a><a href="{base}/bom-sourcing/">{labels['bom']}</a><a href="{base}/factory-surplus/">{labels['surplus']}</a><a href="{base}/suppliers/">{labels['suppliers']}</a><a href="{base}/quality/">{labels['quality']}</a></nav><a class="btn" href="{base}/rfq/">{labels['rfq']}</a></header>'''
+    header = f'''{language}<header class="wrap nav"><a class="brand" href="{base}/"><i>VN</i> Electronics Hub</a><nav class="links"><a href="{component_href}">{labels['components']}</a><a href="{base}/bom-sourcing/">{labels['bom']}</a><a href="{base}/factory-surplus/">{labels['surplus']}</a><a href="{base}/suppliers/">{labels['suppliers']}</a><a href="{base}/quality/">{labels['quality']}</a><a href="https://vietchiphub.com/cong-dong/">{labels['community']}</a></nav><a class="btn" href="{base}/rfq/">{labels['rfq']}</a></header>'''
     if path == "rfq":
         core = f'''<section class="pagehero"><div class="wrap"><div class="crumb"><a href="{base}/">{labels['home']}</a> / RFQ</div><span class="eyebrow">{labels['supply']}</span><h1>{escape(title)}</h1><p>{escape(desc)}</p></div></section><section><div class="wrap"><h2>{labels['formtitle']}</h2><form class="form" name="component-rfq-{lang}" method="POST" data-netlify="true" action="{base}/thank-you/"><input type="hidden" name="form-name" value="component-rfq-{lang}"><input name="company" placeholder="{labels['company']}" required><input name="contact" placeholder="{labels['contact']}" required><input name="part_number" placeholder="{labels['part']}" required><input name="quantity" placeholder="{labels['qty']}"><textarea class="full" name="details" rows="5" placeholder="{labels['details']}"></textarea><button class="btn full" type="submit">{labels['send']}</button><p class="small full">{labels['disclaimer']}</p></form></div></section>'''
     elif not path:
@@ -247,18 +247,31 @@ def build():
     # 这会把手工添加、不在任何数据列表里的静态资源（例如联系方式二维码图片）
     # 一并删掉。这里在 rmtree 之前先备份 assets/contact/，重建后立即还原。
     import tempfile
-    contact_src = OUT / "assets" / "contact"
-    contact_backup = None
-    if contact_src.exists():
-        contact_backup = Path(tempfile.mkdtemp(prefix="vietchiphub_contact_backup_"))
-        shutil.copytree(contact_src, contact_backup / "contact")
+    # 手工添加、不在任何数据列表里的目录（联系方式二维码 + 社区功能：登录/注册/社区板块 + 共享 js）
+    # 会被下面的 rmtree(OUT) 整体删掉，这里先备份，重建后立即还原。
+    PRESERVE_DIRS = [
+        OUT / "assets" / "contact",
+        OUT / "js",
+        OUT / "dang-nhap",
+        OUT / "dang-ky",
+        OUT / "cong-dong",
+    ]
+    preserve_backup = None
+    existing = [d for d in PRESERVE_DIRS if d.exists()]
+    if existing:
+        preserve_backup = Path(tempfile.mkdtemp(prefix="vietchiphub_preserve_backup_"))
+        for d in existing:
+            shutil.copytree(d, preserve_backup / d.name)
     if OUT.exists():
         shutil.rmtree(OUT)
     (OUT/"assets").mkdir(parents=True,exist_ok=True)
     (OUT/"assets/site.css").write_text(CSS,encoding="utf-8")
-    if contact_backup is not None:
-        shutil.copytree(contact_backup / "contact", OUT / "assets" / "contact")
-        shutil.rmtree(contact_backup)
+    if preserve_backup is not None:
+        for d in existing:
+            target = (OUT / "assets" / d.name) if d.parent.name == "assets" else (OUT / d.name)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copytree(preserve_backup / d.name, target)
+        shutil.rmtree(preserve_backup)
     for path,title,desc,heading in PAGES:
         target = OUT/"en" if not path else OUT/"en"/path
         target.mkdir(parents=True,exist_ok=True)
@@ -302,6 +315,7 @@ def build():
     urls += [f"{DOMAIN}/{path}/" for path,*_ in MEMORY_PAGES]
     urls += [f"{DOMAIN}/linh-kien/{slug}/" for slug,*_ in OPPORTUNITY_PAGES]
     urls += [f"{DOMAIN}/linh-kien/"]
+    urls += [f"{DOMAIN}/cong-dong/"]
     (OUT/"sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'<url><loc>{u}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n' for u in urls)+'</urlset>\n',encoding="utf-8")
     (OUT/"robots.txt").write_text(f'User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n',encoding="utf-8")
     (ROOT/"netlify.toml").write_text('[build]\n  publish = "public"\n\n[[headers]]\n  for = "/*"\n  [headers.values]\n    X-Content-Type-Options = "nosniff"\n    Referrer-Policy = "strict-origin-when-cross-origin"\n    Permissions-Policy = "camera=(), microphone=(), geolocation=()"\n',encoding="utf-8")
