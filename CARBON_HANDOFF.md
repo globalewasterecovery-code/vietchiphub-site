@@ -2,7 +2,7 @@ DATE=2026-08-29
 AI_WORKER=Claude
 PROJECT=VietChipHub (vietchiphub-v1)
 BRANCH=main
-LAST_COMMIT=(pending — see COMPLETED below, this handoff is part of the commit being made)
+LAST_COMMIT=b1da6e4
 COMPLETED=
 - Investigation only this pass, no functional code changed — see NEXT_ACTION for why, and for the concrete follow-up this unblocks.
 - Confirmed VietChipHub already has real, working multi-language infrastructure, more mature than the P2 task description assumed: public/ (vi, at root) + public/en/ + public/zh/, each with correct per-page hreflang alternates (vi/en/zh-Hans/x-default), proper per-locale <title>/description/OG tags/JSON-LD, and a plain-text top-bar switcher ("VI · EN · 中文") present on every localized page. Per "不重复重构已经正常工作的东西", this should be REUSED, not replaced with the SoulEntropy/VNGO shared i18n.js runtime.
