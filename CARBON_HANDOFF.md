@@ -2,26 +2,27 @@ DATE=2026-08-29
 AI_WORKER=Claude
 PROJECT=VietChipHub (vietchiphub-v1)
 BRANCH=main
-LAST_COMMIT=b1da6e4
+LAST_COMMIT=cce99d8
 COMPLETED=
-- Investigation only this pass, no functional code changed — see NEXT_ACTION for why, and for the concrete follow-up this unblocks.
-- Confirmed VietChipHub already has real, working multi-language infrastructure, more mature than the P2 task description assumed: public/ (vi, at root) + public/en/ + public/zh/, each with correct per-page hreflang alternates (vi/en/zh-Hans/x-default), proper per-locale <title>/description/OG tags/JSON-LD, and a plain-text top-bar switcher ("VI · EN · 中文") present on every localized page. Per "不重复重构已经正常工作的东西", this should be REUSED, not replaced with the SoulEntropy/VNGO shared i18n.js runtime.
-- The one real gap versus Carbon's item D (matches what VietnamZiChan had before this same P2 pass fixed it): the switcher has no persistence. Clicking EN or 中文 works, but there's no memory of that choice — a returning visitor lands back on the plain "/" (Vietnamese) every time, and there's no browser-language-based first-visit recommendation either.
-- Why this wasn't patched this pass (unlike the near-identical fix already shipped for VietnamZiChan): VietChipHub's page HTML is NOT assembled through one shared template function the way VietnamZiChan's is. Instead build_site.py has at least 5 separate f-string page-shell builders (shell() at line 143, an inline return inside localized_page() at line ~202, plus 3 more ad-hoc inline `<!doctype html>...` returns around lines 226/235/243) — each duplicates its own <head>/<body> wiring, and NONE of them load a single shared JS file the way VietnamZiChan's assets/site.js (loaded on every page) does. Adding the click-listener + redirect-check safely means either (a) touching all 5 duplicate shells individually (higher risk of missing one or introducing inconsistency), or (b) first consolidating them to reference one shared script tag (a real, worthwhile refactor, but bigger than a "P2 add persistence" task and outside this pass's time budget). Rushing either without careful verification risked exactly the kind of half-finished, undocumented change this engagement explicitly prohibits — so this pass stops here and documents the concrete path instead.
+- Shared lang-persist.js wired in (see commit cce99d8). Existing vi/en/zh + hreflang generator structure untouched — persistence only.
+- Added public/js/lang-persist.js: click-listener on the top-bar switcher (`.top a`) storing the chosen language (localStorage + 365-day cookie); on the plain Vietnamese root page only, redirects a returning visitor to their stored non-vi choice, or recommends zh/en from navigator.languages on a genuinely first visit (never forces, never touches a direct /en/ or /zh/ visit).
+- Instead of editing each of the ~5 separate page-shell f-string builders individually (higher risk of missing one), patched the 2 shared footer builders (footer() and localized_page()'s inline `foot` variable) that every shell ultimately calls — one script tag insertion point covers all ~96 generated pages.
+- Backed up build_site.py to build_site.py.pre-i18n-backup before editing.
 TESTED=
-(nothing changed this pass; existing site behavior unverified/untouched)
+- python3 -m py_compile — syntax OK.
+- Ran `python3 build_site.py` — regenerated all ~96 pages successfully, no errors.
+- git diff confirmed EVERY changed file's only difference is the single appended `<script src="/js/lang-persist.js" defer></script>` line — no unintended content drift anywhere.
+- Unit-tested the redirect-decision logic in isolation (Node): manual/stored choice always wins over browser locale; an already-vi visitor with no stored preference gets no redirect; a first-time zh-CN browser gets recommended /zh/; a stored 'en' choice persists even when the browser locale is vi-VN.
 NOT_TESTED=
-n/a — no code changes
+- Live browser round-trip against the deployed Netlify site (verified at the unit-logic + build-output level only, consistent with the time budget for this pass).
 BLOCKERS=
-None functional — this is a scoping/sequencing decision, not a technical blocker. GitHub push also not attempted this pass (item H), consistent with the other two repos in this P2 round.
+GitHub push not attempted this pass — same 403-from-proxy condition as the other 3 repos, not retried (per the standing rule: one attempt per repo, no repeated retries).
 FILES_CHANGED=
-CARBON_HANDOFF.md (this file) only.
+build_site.py (2 targeted edits to footer()/foot), build_site.py.pre-i18n-backup (new), public/js/lang-persist.js (new), ~96 generated HTML pages under public/ (regenerated, each with one appended script tag), CARBON_HANDOFF.md (this file).
 DATABASE_CHANGES=none
 ROLLBACK=
-n/a (docs-only commit).
+Restore build_site.py from build_site.py.pre-i18n-backup, delete public/js/lang-persist.js, re-run `python3 build_site.py` to regenerate all pages back to their prior state.
 NEXT_ACTION=
-1. (Recommended first step, low risk) Add one small shared script file (e.g. public/js/lang-persist.js, same design already shipped and tested on VNGO/VietnamZiChan: a click-listener on the switcher links that writes localStorage+cookie, plus a small guarded redirect-check for the root "/" page) and reference it via `<script src="/js/lang-persist.js" defer></script>` — the switcher links across all 5 shell variants already have the same structural shape (`<div class="top">...<span>` with the last `<span>` holding the VI/EN/中文 links: `.top .wrap span:last-child a`), so ONE script works for all of them without touching each shell's per-locale copy.
-2. Add that one `<script>` tag to each of the ~5 page-shell f-string builders (mechanical, low-risk, same one-line insertion each time) — or, better, refactor the 5 duplicate shells to call one shared `page_shell(...)` helper first (removes the duplication itself, a genuine code-quality win, but is a larger, separate refactor — do NOT combine both changes in one commit; ship the script-tag insertion first, consider the dedup refactor as its own later, clearly-labeled commit).
-3. Once wired, verify with the same method used for VNGO/VietnamZiChan: run build_site.py, confirm git diff is scoped to only the intended files, unit-test the redirect-decision/click-extraction logic (can reuse the exact same tested logic/snippet already shipped in scripts/build_portal.py in the vietnamzichan-site repo — same 3-locale shape: vi/en/zh).
-4. Extending to ko/ja (VietChipHub's remaining priority locales beyond the existing vi/en/zh) is a separate, larger content task — queue it in I18N_TRANSLATION_QUEUE.json rather than attempting inline.
+1. Extend to ko/ja per Carbon's VietChipHub priority list — same caution as VietnamZiChan applies: check whether build_site.py has similarly scattered per-language dict literals before adding new lang codes (this file's structure is different — labels come from one `labels = ({...} if vi else {...})` ternary in localized_page(), which is cleaner than VietnamZiChan's — worth a quick check but likely safer to extend).
+2. Live browser verification against the deployed site once pushed.
 SAFE_TO_CONTINUE=yes
