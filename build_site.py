@@ -74,17 +74,138 @@ ZH_PAGES = [
 ]
 
 CHIPS = [
-    {"slug":"stm32f103c8t6", "name":"STM32F103C8T6", "maker":"STMicroelectronics", "group":"MCU công nghiệp", "summary":"Vi điều khiển Arm Cortex-M3 72 MHz, bộ nhớ Flash 64 KB, có USB và CAN; thường dùng trong điều khiển động cơ, PLC, biến tần và thiết bị công nghiệp.", "source":"https://www.st.com/en/microcontrollers-microprocessors/stm32f103c8.html", "status":"Đang sản xuất theo trang sản phẩm của hãng", "restricted":False},
-    {"slug":"tms320f28335", "name":"TMS320F28335", "maker":"Texas Instruments", "group":"DSP / MCU điều khiển thời gian thực", "summary":"Bộ điều khiển C2000 hiệu năng cao cho truyền động động cơ, biến tần năng lượng mặt trời, nguồn số, xe điện và xử lý tín hiệu.", "source":"https://www.ti.com/product/TMS320F28335", "status":"Cần xác nhận tình trạng và date code theo từng báo giá", "restricted":False},
-    {"slug":"esp32-s3", "name":"ESP32-S3", "maker":"Espressif Systems", "group":"Wi-Fi / Bluetooth SoC", "summary":"SoC tích hợp Wi-Fi 2.4 GHz, Bluetooth 5 LE, CPU Xtensa LX7 hai nhân, USB OTG và phần cứng bảo mật cho IoT và tự động hóa.", "source":"https://www.espressif.com/en/chip/esp32-s3-en", "status":"Có nhiều biến thể bộ nhớ và module; phải xác nhận đúng mã đầy đủ", "restricted":False},
-    {"slug":"fs100r12w2t7", "name":"FS100R12W2T7", "maker":"Infineon Technologies", "group":"Module IGBT", "summary":"Module IGBT sixpack 1200 V, 100 A, công nghệ IGBT7 trong vỏ EasyPACK 2B cho truyền động công nghiệp, điều hòa và UPS.", "source":"https://www.infineon.com/part/FS100R12W2T7", "status":"Hãng ghi nhận trạng thái active and preferred", "restricted":False},
-    {"slug":"nvidia-h100", "name":"NVIDIA H100", "maker":"NVIDIA", "group":"GPU trung tâm dữ liệu AI", "summary":"GPU kiến trúc Hopper cho huấn luyện và suy luận AI; cấu hình, bộ nhớ và hình thức sản phẩm khác nhau theo hệ thống H100 SXM, NVL hoặc PCIe.", "source":"https://www.nvidia.com/en-us/data-center/h100/", "status":"Mặt hàng điện toán tiên tiến có thể chịu kiểm soát xuất khẩu tùy cấu hình và giao dịch", "restricted":True},
-    {"slug":"nvidia-h200", "name":"NVIDIA H200", "maker":"NVIDIA", "group":"GPU AI / HPC", "summary":"GPU Hopper với bộ nhớ HBM3e dành cho AI tạo sinh và điện toán hiệu năng cao; yêu cầu phải được rà soát theo cấu hình và bên sử dụng cuối.", "source":"https://www.nvidia.com/en-eu/data-center/h200/", "status":"Mặt hàng điện toán tiên tiến có thể cần giấy phép hoặc bị hạn chế", "restricted":True},
-    {"slug":"atmega328p", "name":"ATmega328P", "maker":"Microchip Technology (trước đây Atmel)", "group":"MCU 8-bit công nghiệp và nhúng", "summary":"Chip ATmega328P của Microchip Technology là vi điều khiển AVR 8-bit với tốc độ lên đến 20 MHz, 32 KB Flash, 2 KB SRAM và 1 KB EEPROM, phổ biến trong các ứng dụng điều khiển nhúng, thiết bị đo và tự động hóa nhỏ.", "source":"https://www.microchip.com/en-us/product/ATmega328P", "status":"Đang sản xuất theo trang sản phẩm của hãng; cần xác nhận date code và nguồn gốc theo từng lô", "restricted":False},
-    {"slug":"tps54331", "name":"TPS54331", "maker":"Texas Instruments", "group":"IC nguồn xung công nghiệp", "summary":"TPS54331 là bộ giảm áp buck công suất lên đến 3A, hoạt động với điện áp đầu vào tối đa 28V và tần số 570kHz, phù hợp cho ứng dụng nguồn công nghiệp và bo mạch điều khiển.", "source":"https://www.ti.com/product/TPS54331", "status":"Đang sản xuất theo trang sản phẩm của hãng; cần xác nhận date code theo từng báo giá", "restricted":False},
-    {"slug":"lm358", "name":"LM358", "maker":"Texas Instruments", "group":"IC khuếch đại thuật toán (op-amp)", "summary":"Việc sử dụng LM358, một op-amp kép điện áp thấp của Texas Instruments, rất phổ biến trong các mạch cảm biến, khuếch đại tín hiệu và điều khiển công nghiệp nhờ độ tin cậy và hiệu suất cao.", "source":"https://www.ti.com/product/LM358", "status":"Đang sản xuất theo trang sản phẩm của hãng; có nhiều hãng thứ hai sản xuất, cần xác nhận nguồn gốc theo từng lô", "restricted":False},
-    {"slug":"xfl4020-102mec", "name":"XFL4020-102MEC", "maker":"Coilcraft", "group":"Cuộn cảm công suất SMD / Power Inductor", "summary":"Cuộn cảm công suất chống nhiễu 1.0 µH ±20%, kích thước 4x4x2.1 mm, DCR 14.5 mΩ, Isat 5.1A, đóng gói Tape & Reel 1000/2000 pcs; sử dụng trong mạch DC-DC và bo SMT công nghiệp.", "source":"https://www.coilcraft.com/en-us/products/power/power-inductors/shielded-smt/xfl/xfl4020/", "status":"Nhu cầu mua 30,000 pcs (DC 26+); cần kiểm tra date code và nhãn cuộn nguyên seal", "restricted":False},
-    {"slug":"213851-1", "name":"213851-1", "maker":"TE Connectivity", "group":"Đầu nối công nghiệp / CPC Connector", "summary":"Đầu nối vỏ nhựa tròn CPC Series 1 size 23-16 16 chân vị trí, chống va đập và chịu môi trường công nghiệp; phổ biến trong điều khiển máy móc và tự động hóa.", "source":"https://www.te.com/usa-en/product-213851-1.html", "status":"Nhu cầu giao gấp 4-6 ngày (600 pcs); cần kiểm tra tồn kho sẵn sàng đóng gói giao hàng", "restricted":False},
+    {
+        "slug": "stm32f103c8t6",
+        "name": "STM32F103C8T6",
+        "maker": "STMicroelectronics",
+        "group": "MCU công nghiệp Arm Cortex-M3",
+        "summary": "Vi điều khiển Arm Cortex-M3 72 MHz, 64 KB Flash, 20 KB SRAM, hỗ trợ CAN, USB, USART, SPI và ADC 12-bit.",
+        "usage": "Ứng dụng rộng rãi trong thiết bị tự động hóa nhà xưởng, bo mạch điều khiển động cơ bước/BLDC, biến tần công nghiệp, bo PLC dòng nhỏ, hệ thống thu thập dữ liệu SMT và thiết bị IoT công nghiệp.",
+        "supply": "VN Electronics Hub hỗ trợ cung ứng hàng chính hãng STMicroelectronics đóng gói khay (Tray 250 pcs) hoặc cuộn Tape & Reel. Hỗ trợ giao hàng nhanh tại Hà Nội, Bắc Ninh, TP.HCM.",
+        "source": "https://www.st.com/en/microcontrollers-microprocessors/stm32f103c8.html",
+        "status": "Sẵn sàng kênh cung ứng; xác nhận nhãn mác, lot code và Date Code 2025/2026",
+        "restricted": False
+    },
+    {
+        "slug": "tms320f28335",
+        "name": "TMS320F28335",
+        "maker": "Texas Instruments",
+        "group": "DSP C2000 điều khiển thời gian thực",
+        "summary": "Bộ xử lý tín hiệu số DSP 32-bit floating-point 150 MHz, tích hợp PWM độ phân giải cao, 68-channel ADC và CAN bus.",
+        "usage": "Chuyên dùng cho mạch điều khiển biến tần năng lượng mặt trời (Solar Inverter), bộ truyền động động cơ xe điện (EV Motor Controller), hệ thống nguồn công suất số (Digital Power), UPS công nghiệp và thiết bị điều khiển chuyển động.",
+        "supply": "Hỗ trợ cung ứng mã TMS320F28335PGFA / PTPQ nguyên seal khay/hộp từ đại lý ủy quyền TI; hỗ trợ kiểm định hình ảnh nhãn và Date Code trước khi giao.",
+        "source": "https://www.ti.com/product/TMS320F28335",
+        "status": "Có sẵn kênh hỗ trợ cung ứng; kiểm tra date code và bằng chứng theo từng đơn hàng",
+        "restricted": False
+    },
+    {
+        "slug": "esp32-s3",
+        "name": "ESP32-S3",
+        "maker": "Espressif Systems",
+        "group": "SoC Wi-Fi & Bluetooth 5 (LE)",
+        "summary": "SoC hai nhân Xtensa LX7 240 MHz, tích hợp Wi-Fi 802.11 b/g/n, Bluetooth 5 LE, tăng tốc phần cứng AI/Vector và USB OTG.",
+        "usage": "Ứng dụng trong các thiết bị Edge AI camera, Gateway truyền dữ liệu IoT nhà máy, màn hình HMI cảm ứng, bộ điều khiển tự động hóa tòa nhà và các thiết bị giám sát không dây.",
+        "supply": "Cung ứng chip IC lẻ (ESP32-S3) và các dòng module tiêu chuẩn (ESP32-S3-WROOM-1 / N8R8 / N16R8) đóng gói cuộn Tape & Reel chính hãng Espressif.",
+        "source": "https://www.espressif.com/en/chip/esp32-s3-en",
+        "status": "Cung ứng sẵn sàng cho cả thử mẫu (Sample) và sản xuất hàng loạt (Mass Production)",
+        "restricted": False
+    },
+    {
+        "slug": "fs100r12w2t7",
+        "name": "FS100R12W2T7",
+        "maker": "Infineon Technologies",
+        "group": "Module IGBT 1200V / 100A",
+        "summary": "Module IGBT 6-pack (Sixpack) 1200 V, 100 A công nghệ IGBT7 tiên tiến trong vỏ EasyPACK 2B tích hợp NTC.",
+        "usage": "Ứng dụng trong biến tần điều khiển động cơ 3 pha công nghiệp, hệ thống điều hòa thương mại, bộ đổi nguồn servo, UPS công suất lớn và máy hàn công nghiệp.",
+        "supply": "Hỗ trợ cung ứng module IGBT Infineon chính hãng, đầy đủ CO/CQ và chứng từ nguồn gốc; sẵn sàng hỗ trợ giao hàng thay thế xử lý dừng máy khẩn cấp.",
+        "source": "https://www.infineon.com/part/FS100R12W2T7",
+        "status": "Sẵn sàng hỗ trợ báo giá và cung ứng theo mã chính xác",
+        "restricted": False
+    },
+    {
+        "slug": "nvidia-h100",
+        "name": "NVIDIA H100",
+        "maker": "NVIDIA",
+        "group": "GPU Trí tuệ nhân tạo & Trung tâm dữ liệu",
+        "summary": "GPU điện toán kiến trúc Hopper tích hợp bộ nhớ HBM3 tốc độ cao, hỗ trợ nhân Transformer Engine cho huấn luyện AI.",
+        "usage": "Ứng dụng trong hạ tầng máy chủ huấn luyện mô hình ngôn ngữ lớn (LLM), AI tạo sinh (Generative AI), điện toán hiệu năng cao (HPC) và trung tâm dữ liệu trí tuệ nhân tạo.",
+        "supply": "VN Electronics Hub tiếp nhận rà soát yêu cầu cấu hình hệ thống máy chủ H100 SXM5 / PCIe, kiểm tra bên sử dụng cuối (End-User) và tuân thủ quy định xuất khẩu.",
+        "source": "https://www.nvidia.com/en-us/data-center/h100/",
+        "status": "Mặt hàng điện toán tiên tiến; tiếp nhận rà soát theo dự án cụ thể",
+        "restricted": True
+    },
+    {
+        "slug": "nvidia-h200",
+        "name": "NVIDIA H200",
+        "maker": "NVIDIA",
+        "group": "GPU AI & Siêu máy chủ HBM3e",
+        "summary": "GPU kiến trúc Hopper trang bị 141 GB bộ nhớ HBM3e với băng thông 4.8 TB/s cho suy luận và huấn luyện AI quy mô siêu lớn.",
+        "usage": "Dành cho các siêu cụm trung tâm dữ liệu AI, mô hình AI đa thức, tính toán khoa học và điện toán đám mây AI hiệu năng cao.",
+        "supply": "Hỗ trợ tiếp nhận nhu cầu cấu hình hệ thống máy chủ H200, rà soát hồ sơ tuân thủ và thông tin mục đích sử dụng cuối.",
+        "source": "https://www.nvidia.com/en-eu/data-center/h200/",
+        "status": "Tiếp nhận thông tin nhu cầu và rà soát tuân thủ xuất khẩu",
+        "restricted": True
+    },
+    {
+        "slug": "atmega328p",
+        "name": "ATmega328P",
+        "maker": "Microchip Technology",
+        "group": "MCU AVR 8-bit công nghiệp",
+        "summary": "Vi điều khiển AVR 8-bit 20 MHz, 32 KB Flash, 2 KB SRAM, 1 KB EEPROM với bộ so sánh tương tự và giao tiếp SPI/I2C/USART.",
+        "usage": "Ứng dụng trong bo mạch cảm biến công nghiệp, mô-đun điều khiển thiết bị gia dụng, hệ thống nhúng thu gọn, máy đo chiều dài/nhiệt độ và ứng dụng giảng dạy kỹ thuật.",
+        "supply": "Cung ứng mã ATmega328P-AU (TQFP-32) và ATmega328P-PU (DIP-28) nguyên seal hãng; đĩa Tape & Reel và khay có sẵn.",
+        "source": "https://www.microchip.com/en-us/product/ATmega328P",
+        "status": "Sẵn sàng báo giá và cung ứng số lượng lớn",
+        "restricted": False
+    },
+    {
+        "slug": "tps54331",
+        "name": "TPS54331",
+        "maker": "Texas Instruments",
+        "group": "IC nguồn xung Buck 3A 28V",
+        "summary": "IC hạ áp Step-Down Converter 3A tích hợp MOSFET công suất, dải điện áp đầu vào 3.5V - 28V, tần số chuyển mạch 570 kHz.",
+        "usage": "Được sử dụng phổ biến trong mạch nguồn cho PLC, bo mạch điều khiển tự động hóa, thiết bị hạ tầng viễn thông, bộ cấp nguồn 12V/24V sang 3.3V/5V trong nhà máy SMT.",
+        "supply": "VN Electronics Hub hỗ trợ cung ứng mã TPS54331DDR (SOIC-8) đóng gói cuộn Tape & Reel 2500 pcs nguyên seal TI, kiểm tra Date Code 2025/2026.",
+        "source": "https://www.ti.com/product/TPS54331",
+        "status": "Có sẵn kênh phân phối; hỗ trợ giao hàng nhanh",
+        "restricted": False
+    },
+    {
+        "slug": "lm358",
+        "name": "LM358",
+        "maker": "Texas Instruments",
+        "group": "IC khuếch đại thuật toán Dual Op-Amp",
+        "summary": "IC Op-Amp kép nguồn đơn (3V - 32V), tiêu thụ dòng thấp, dải điện áp đầu vào chung bao gồm cả đường mass (GND).",
+        "usage": "Ứng dụng trong mạch khuếch đại tín hiệu cảm biến dòng điện, bộ lọc tín hiệu tương tự, mạch so sánh điện áp, mạch điều chỉnh tín hiệu transducer và bo nguồn điện tử.",
+        "supply": "Cung ứng dải mã LM358DR (SOIC-8) và LM358P (DIP-8) từ TI, ST, ONsemi; sẵn hàng đĩa Tape & Reel số lượng lớn cho các xưởng SMT.",
+        "source": "https://www.ti.com/product/LM358",
+        "status": "Cung ứng ổn định số lượng lớn; hỗ trợ báo giá theo cuộn",
+        "restricted": False
+    },
+    {
+        "slug": "xfl4020-102mec",
+        "name": "XFL4020-102MEC",
+        "maker": "Coilcraft",
+        "group": "Cuộn cảm công suất SMD 1.0 µH",
+        "summary": "Cuộn cảm công suất chống nhiễu 1.0 µH ±20%, kích thước 4.0x4.0x2.1 mm, DCR cực thấp 14.5 mΩ, dòng bão hòa Isat 5.1A.",
+        "usage": "Ứng dụng trong các mạch DC-DC Buck/Boost tần số cao, bộ nguồn VRM cấp điện cho vi xử lý/FPGA, bo mạch viễn thông 5G, thiết bị di động và dây chuyền lắp ráp SMT công nghiệp.",
+        "supply": "VN Electronics Hub hỗ trợ cung ứng số lượng lớn (30,000 pcs) đóng gói Tape & Reel 1000/2000 pcs nguyên seal hãng Coilcraft; xác minh Date Code 2025/2026; hỗ trợ mức giá mục tiêu $0.37 - $0.40/pc.",
+        "source": "https://www.coilcraft.com/en-us/products/power/power-inductors/shielded-smt/xfl/xfl4020/",
+        "status": "Sẵn sàng cung ứng số lượng lớn 30,000 pcs; hỗ trợ báo giá và giao hàng tại Việt Nam",
+        "restricted": False
+    },
+    {
+        "slug": "213851-1",
+        "name": "213851-1",
+        "maker": "TE Connectivity",
+        "group": "Đầu nối vỏ nhựa tròn 16 chân CPC",
+        "summary": "Vỏ đầu nối tròn Circular Plastic Connector (CPC) Series 1 Size 23-16, 16 vị trí chân, vỏ nhựa nhiệt dẻo đen chịu va đập và mài mòn.",
+        "usage": "Ứng dụng trong truyền dẫn tín hiệu và nguồn cho máy công nghiệp, hệ thống tự động hóa nhà máy, rô-bốt sản xuất, tủ điện ngoài trời và thiết bị vận tải.",
+        "supply": "VN Electronics Hub hỗ trợ cung ứng 600 pcs đầu nối TE 213851-1 chính hãng; sẵn sàng hỗ trợ giao hàng khẩn cấp 3-5 ngày bằng đường hàng không phục vụ tiến độ nhà máy.",
+        "source": "https://www.te.com/usa-en/product-213851-1.html",
+        "status": "Sẵn sàng cung ứng 600 pcs; hỗ trợ giao hàng nhanh 3-5 ngày",
+        "restricted": False
+    }
 ]
 
 INTENT_PAGES = [
@@ -207,9 +328,9 @@ def localized_page(lang, prefix, path, title, desc, heading):
 def chip_page(chip):
     path = f"chip/{chip['slug']}"
     canonical = f"{DOMAIN}/{path}/"
-    compliance = '''<p class="notice"><strong>Kiểm tra tuân thủ bắt buộc:</strong> Đây là trang thông tin, không phải cam kết bán hàng. Yêu cầu phải nêu rõ người mua, bên sử dụng cuối, quốc gia đích và mục đích sử dụng. Nền tảng không hỗ trợ chuyển hướng, che giấu bên nhận hoặc né tránh giấy phép.</p>''' if chip["restricted"] else '''<p class="notice">Không coi trạng thái “có hàng” là đã xác minh nếu chưa có báo giá, hình ảnh nhãn, số lượng, vị trí và ngày kiểm tra. Khuyến nghị kiểm định độc lập trước khi nhận hàng.</p>'''
+    compliance = '''<p class="notice"><strong>Kiểm tra tuân thủ bắt buộc:</strong> Đây là trang thông tin và rà soát nguồn cung. Yêu cầu phải nêu rõ người mua, bên sử dụng cuối, quốc gia đích và mục đích sử dụng. Nền tảng không hỗ trợ chuyển hướng, che giấu bên nhận hoặc né tránh giấy phép.</p>''' if chip["restricted"] else '''<p class="notice"><strong>Khả năng cung ứng:</strong> VN Electronics Hub hỗ trợ rà soát nguồn cung, kiểm tra nhãn đĩa Tape & Reel / Tray / Box nguyên seal, xác minh Date Code (2025/2026) và cung cấp báo giá theo số lượng thử mẫu hoặc hàng loạt.</p>'''
     schema = '{"@context":"https://schema.org","@type":"Product","name":"%s","brand":{"@type":"Brand","name":"%s"},"category":"%s","description":"%s","url":"%s"}' % (chip["name"], chip["maker"], chip["group"], chip["summary"], canonical)
-    body = f'''<main><section class="pagehero"><div class="wrap"><div class="crumb"><a href="/">Trang chủ</a> / <a href="/components/">Linh kiện</a> / {chip['name']}</div><span class="eyebrow">{chip['group']} · Việt Nam</span><h1>{chip['name']} tại Việt Nam: thông tin, tình trạng và yêu cầu báo giá</h1><p>{chip['summary']}</p><div class="actions"><a class="btn" href="/rfq/?part={chip['slug']}">Gửi nhu cầu {chip['name']}</a><a class="btn alt" href="{chip['source']}" rel="nofollow noopener">Dữ liệu chính thức của hãng</a></div></div></section><section><div class="wrap split"><div><h2>Dữ liệu tham chiếu</h2><div class="grid"><article class="card"><span class="tag">Mã linh kiện</span><h3>{chip['name']}</h3><p>Nhà sản xuất: {chip['maker']}</p></article><article class="card"><span class="tag">Nhóm sản phẩm</span><h3>{chip['group']}</h3><p>{chip['status']}</p></article><article class="card"><span class="tag">Cập nhật dữ liệu</span><h3>{date.today().isoformat()}</h3><p>Nguồn thông số: trang sản phẩm chính thức của nhà sản xuất.</p></article></div></div></div></section><section class="soft"><div class="wrap"><h2>Khi tìm mua {chip['name']}, cần xác nhận gì?</h2><p class="lead">Mã đầy đủ, hậu tố đóng gói, số lượng, date code, cấp nhiệt độ, tình trạng hàng, giấy tờ truy xuất, vị trí giao hàng và thời hạn.</p>{compliance}<div class="actions"><a class="btn" href="/rfq/?part={chip['slug']}">Đăng yêu cầu báo giá</a><a class="btn alt" href="/quality/">Quy trình kiểm tra</a></div></div></section><section><div class="wrap faq"><h2>Câu hỏi thường gặp</h2><details><summary>{chip['name']} có sẵn tại Việt Nam không?</summary><p>Tồn kho thay đổi liên tục. Chỉ xác nhận sau khi có bằng chứng hàng, số lượng, vị trí và thời điểm kiểm tra cụ thể.</p></details><details><summary>Có thể đề xuất linh kiện thay thế không?</summary><p>Có thể lập danh sách tham khảo, nhưng mọi thay thế phải được kỹ sư và người mua phê duyệt.</p></details><details><summary>VN Electronics Hub có bảo đảm hàng chính hãng không?</summary><p>Không đưa ra bảo đảm tự động. Nền tảng tổ chức bằng chứng và khuyến nghị kiểm định phù hợp trước giao dịch.</p></details></div></section></main>'''
+    body = f'''<main><section class="pagehero"><div class="wrap"><div class="crumb"><a href="/">Trang chủ</a> / <a href="/components/">Linh kiện</a> / {chip['name']}</div><span class="eyebrow">{chip['group']} · Việt Nam</span><h1>{chip['name']} tại Việt Nam: thông tin, công dụng & khả năng cung ứng</h1><p>{chip['summary']}</p><div class="actions"><a class="btn" href="/rfq/?part={chip['slug']}">Gửi nhu cầu {chip['name']}</a><a class="btn alt" href="{chip['source']}" rel="nofollow noopener">Dữ liệu chính thức của hãng</a></div></div></section><section><div class="wrap split"><div><h2>Dữ liệu tham chiếu & Khả năng cung ứng</h2><div class="grid"><article class="card"><span class="tag">Mã linh kiện</span><h3>{chip['name']}</h3><p>Nhà sản xuất: {chip['maker']}</p></article><article class="card"><span class="tag">Khả năng cung ứng</span><h3>Cung ứng có sẵn</h3><p>{chip['supply']}</p></article><article class="card"><span class="tag">Cập nhật dữ liệu</span><h3>{date.today().isoformat()}</h3><p>{chip['status']}</p></article></div></div></div></section><section class="soft"><div class="wrap"><h2>Công dụng kỹ thuật & Mạch ứng dụng thực tế</h2><p class="lead">{chip['usage']}</p>{compliance}<div class="actions" style="margin-top:20px"><a class="btn" href="/rfq/?part={chip['slug']}">Đăng yêu cầu báo giá ngay</a><a class="btn alt" href="/quality/">Quy trình kiểm tra chất lượng</a></div></div></section><section><div class="wrap faq"><h2>Câu hỏi thường gặp</h2><details><summary>VN Electronics Hub có thể cung ứng {chip['name']} không?</summary><p>Có. Chúng tôi hỗ trợ rà soát nguồn hàng sẵn có, đĩa nguyên seal hãng, kiểm tra Date Code và báo giá cạnh tranh theo số lượng.</p></details><details><summary>{chip['name']} được sử dụng trong các mạch nào?</summary><p>{chip['usage']}</p></details><details><summary>Có thể đề xuất linh kiện thay thế tương đương không?</summary><p>Có thể lập danh sách tham khảo kỹ thuật, nhưng mọi thay thế đều cần được kỹ sư và người mua phê duyệt.</p></details></div></section></main>'''
     head = f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{chip['name']} Việt Nam: thông tin & báo giá | VN Electronics Hub</title><meta name="description" content="Tìm {chip['name']} tại Việt Nam. Xem thông tin hãng, tình trạng tham chiếu, yêu cầu truy xuất và gửi RFQ có kiểm tra."><link rel="canonical" href="{canonical}"><meta property="og:title" content="{chip['name']} tại Việt Nam"><meta property="og:description" content="Thông tin chính thức, kiểm tra nguồn cung và RFQ {chip['name']} tại Việt Nam."><script type="application/ld+json">{schema}</script><link rel="stylesheet" href="/assets/site.css"></head><body>'''
     return head + nav().replace("Submit RFQ","Gửi RFQ").replace("Components","Linh kiện").replace("BOM Sourcing","Tìm nguồn BOM").replace("Surplus","Hàng tồn kho").replace("Suppliers","Nhà cung cấp").replace("Quality","Chất lượng") + body + footer() + '</body></html>'
 
