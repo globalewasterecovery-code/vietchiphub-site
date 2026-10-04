@@ -6,8 +6,8 @@ pages = list(root.glob("**/index.html"))
 assert len(pages) >= 94, len(pages)
 for page in pages:
     text = page.read_text(encoding="utf-8")
-    if "thank-you" in page.parts:
-        assert 'name="robots" content="noindex"' in text
+    if "thank-you" in page.parts or "staff" in page.parts or 'name="robots"' in text:
+        assert 'name="robots" content="noindex' in text
         continue
     assert "<title>" in text and 'name="description"' in text
     assert 'rel="canonical"' in text

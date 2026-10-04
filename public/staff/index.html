@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Staff RFQ Review | VN Electronics Hub</title>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <main>
+    <section class="pagehero">
+      <div class="wrap">
+        <div class="crumb">VN Electronics Hub / Staff</div>
+        <span class="eyebrow">Internal only</span>
+        <h1>RFQ Review</h1>
+        <p>New buyer RFQs land here from the public form. Update status only after a real manual reply or close.</p>
+      </div>
+    </section>
+    <section>
+      <div class="wrap" style="max-width:1180px">
+        <div id="loginPanel">
+          <h2>Unlock</h2>
+          <p class="lead">Enter the staff key. It is kept only in this browser session.</p>
+          <input id="staffKeyInput" type="password" autocomplete="off" placeholder="Staff key" style="max-width:360px;padding:12px;border:1px solid #b8c6d5;border-radius:8px;font:inherit">
+          <button id="unlockBtn" class="btn" type="button" style="margin-left:8px">Unlock</button>
+          <p id="staffMsg" role="status" style="margin-top:10px"></p>
+        </div>
+        <div id="board" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+            <div>
+              <h2>Open RFQs</h2>
+              <p class="lead">NEW count: <strong id="newCount">0</strong></p>
+            </div>
+            <button id="logoutBtn" class="btn alt" type="button">Lock</button>
+          </div>
+          <div style="overflow:auto">
+            <table style="border-collapse:collapse;width:100%;font-size:12px;min-width:1100px">
+              <thead>
+                <tr style="text-align:left;background:#eef5ff">
+                  <th style="padding:8px">ID</th>
+                  <th style="padding:8px">Created</th>
+                  <th style="padding:8px">Lang</th>
+                  <th style="padding:8px">Company</th>
+                  <th style="padding:8px">Contact</th>
+                  <th style="padding:8px">Part number</th>
+                  <th style="padding:8px">Qty</th>
+                  <th style="padding:8px">Target price</th>
+                  <th style="padding:8px">Delivery</th>
+                  <th style="padding:8px">Details</th>
+                  <th style="padding:8px">Status</th>
+                  <th style="padding:8px">Set status</th>
+                </tr>
+              </thead>
+              <tbody id="rfqRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="/js/staff.js"></script>
+</body>
+</html>
