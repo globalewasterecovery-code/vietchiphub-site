@@ -205,6 +205,30 @@ CHIPS = [
         "source": "https://www.te.com/usa-en/product-213851-1.html",
         "status": "Sẵn sàng cung ứng 600 pcs; hỗ trợ giao hàng nhanh 3-5 ngày",
         "restricted": False
+    },
+    {
+        "slug": "s32k144",
+        "name": "S32K144",
+        "maker": "NXP Semiconductors",
+        "group": "MCU ô tô & Công nghiệp Arm Cortex-M4F",
+        "summary": "Vi điều khiển chuẩn ô tô AEC-Q100 Arm Cortex-M4F 112 MHz, 512 KB Flash, tích hợp bộ điều khiển CAN FD, LIN, FlexIO và phần cứng an ninh CSEc.",
+        "usage": "Chuyên dùng trong bộ điều khiển trung tâm ô tô (ECU), hệ thống quản lý pin xe điện (BMS), hộp đen giám sát hành trình, bộ chuyển đổi CAN/LIN và thiết bị điều khiển công nghiệp đòi hỏi độ tin cậy cao.",
+        "supply": "VN Electronics Hub hỗ trợ cung ứng dải mã S32K144UAT0VLHT / S32K144HAT0MLHT (LQFP-64 / LQFP-100) đóng gói cuộn Tape & Reel nguyên seal NXP, kiểm tra Date Code 2025/2026.",
+        "source": "https://www.nxp.com/products/processors-and-microcontrollers/arm-microcontrollers/general-purpose-mcus/s32k-automotive-mcus/s32k1-mcus-for-general-purpose:S32K1",
+        "status": "Sẵn sàng hỗ trợ cung ứng mã S32K144 chính hãng NXP; đầy đủ CO/CQ theo lô",
+        "restricted": False
+    },
+    {
+        "slug": "ec200u",
+        "name": "Quectel EC200U",
+        "maker": "Quectel Wireless Solutions",
+        "group": "Module 4G LTE Cat 1 IoT",
+        "summary": "Module giao tiếp không dây 4G LTE Cat 1 băng thông tối đa 10 Mbps DL / 5 Mbps UL, tích hợp Bluetooth và định vị GNSS tùy chọn.",
+        "usage": "Ứng dụng rộng rãi trong đồng hồ điện/nước thông minh, thiết bị định vị GPS xe máy/ô tô, máy POS thanh toán, gateway truyền dữ liệu tự động hóa nhà máy và thiết bị IoT công nghiệp.",
+        "supply": "Hỗ trợ cung ứng module EC200U-CN / EC200U-EU / EC200U-AU đóng gói cuộn Tape & Reel nguyên seal hãng Quectel, hỗ trợ tư vấn phiên bản firmware và băng tần mạng Việt Nam.",
+        "source": "https://www.quectel.com/product/lte-ec200u-series",
+        "status": "Sẵn sàng báo giá và cung ứng số lượng lớn cho nhà sản xuất IoT",
+        "restricted": False
     }
 ]
 
