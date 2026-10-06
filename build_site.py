@@ -229,6 +229,30 @@ CHIPS = [
         "source": "https://www.quectel.com/product/lte-ec200u-series",
         "status": "Sẵn sàng báo giá và cung ứng số lượng lớn cho nhà sản xuất IoT",
         "restricted": False
+    },
+    {
+        "slug": "cm300dx-24s",
+        "name": "CM300DX-24S",
+        "maker": "Mitsubishi Electric",
+        "group": "Module Dual IGBT 1200V / 300A",
+        "summary": "Module Dual IGBT 6th-Generation NX-Series 1200 V, 300 A vọt công suất thấp, tích hợp công nghệ CSTBT.",
+        "usage": "Chuyên dùng trong biến tần công nghiệp công suất lớn, bộ điều khiển động cơ servo heavy-duty, UPS trung tâm dữ liệu, máy hàn công nghiệp và thiết bị điều khiển tự động hóa nhà máy.",
+        "supply": "VN Electronics Hub hỗ trợ cung ứng module IGBT CM300DX-24S chính hãng Mitsubishi, đầy đủ chứng từ CO/CQ và kết quả đo thử nghiệm cách điện; sẵn sàng giao nhanh phục vụ xử lý sự cố dừng máy.",
+        "source": "https://www.mitsubishielectric.com/semiconductors/powerdevices/",
+        "status": "Sẵn sàng hỗ trợ báo giá và giao hàng khẩn cấp cho nhà máy",
+        "restricted": False
+    },
+    {
+        "slug": "iso7741",
+        "name": "ISO7741",
+        "maker": "Texas Instruments",
+        "group": "IC cách ly số 4 kênh tốc độ cao (Digital Isolator)",
+        "summary": "IC cách ly tín hiệu số 4 kênh (3 In / 1 Out) tốc độ lên đến 100 Mbps, điện áp cách ly 5000 Vrms, khả năng chống nhiễu CMTI > 100 kV/µs.",
+        "usage": "Ứng dụng trong mạch giao tiếp cách ly RS-485 / CAN bus, bộ cách ly gate driver cho biến tần công suất, bo mạch điều khiển PLC, thiết bị đo lường công nghiệp và mạch nguồn y tế.",
+        "supply": "Hỗ trợ cung ứng mã ISO7741DW (SOIC-16 Wide-body) / ISO7741DWR đóng gói cuộn Tape & Reel 2000 pcs nguyên seal TI, kiểm tra Date Code 2025/2026.",
+        "source": "https://www.ti.com/product/ISO7741",
+        "status": "Có sẵn kênh phân phối; hỗ trợ cung ứng số lượng lớn cho xưởng SMT",
+        "restricted": False
     }
 ]
 
