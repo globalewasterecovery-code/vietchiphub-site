@@ -588,6 +588,5 @@ def build():
     urls += [f"{DOMAIN}/daily/"]
     (OUT/"sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'<url><loc>{u}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n' for u in urls)+'</urlset>\n',encoding="utf-8")
     (OUT/"robots.txt").write_text(f'User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n',encoding="utf-8")
-    (ROOT/"netlify.toml").write_text('[build]\n  publish = "public"\n\n[[headers]]\n  for = "/*"\n  [headers.values]\n    X-Content-Type-Options = "nosniff"\n    Referrer-Policy = "strict-origin-when-cross-origin"\n    Permissions-Policy = "camera=(), microphone=(), geolocation=()"\n',encoding="utf-8")
 
 if __name__ == "__main__": build()
