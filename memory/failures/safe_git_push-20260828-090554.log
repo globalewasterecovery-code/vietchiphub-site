@@ -1,0 +1,1 @@
+{'attempts': [{'rc': 128, 'stdout': '', 'stderr': "fatal: unable to access 'https://github.com/globalewasterecovery-code/vietchiphub-site.git/': Could not resolve host: github.com\n"}, {'rc': 128, 'stdout': '', 'stderr': "fatal: unable to access 'https://github.com/globalewasterecovery-code/vietchiphub-site.git/': Could not resolve host: github.com\n"}], 'result': 'failed'}

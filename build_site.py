@@ -321,7 +321,7 @@ def card_grid():
     return '<div class="grid">' + ''.join(f'<article class="card"><span class="tag">Sourcing lane</span><h3>{t}</h3><p>{d}</p><a href="{u}">View category →</a></article>' for t,d,u in CARDS) + '</div>'
 
 def inquiry_form():
-    return '''<form class="form" id="rfq-form" method="POST" action="/api/rfq" novalidate><input name="company" aria-label="Company" placeholder="Company name"><input name="contact" aria-label="Contact" placeholder="Email / WhatsApp / Zalo" required><input name="part_number" aria-label="Part number" placeholder="Part number / BOM title" required><input name="quantity" aria-label="Quantity" placeholder="Quantity"><input name="target_price" aria-label="Target price" placeholder="Target price / budget"><input name="delivery_requirement" aria-label="Delivery requirement" placeholder="Delivery requirement / target date"><textarea class="full" name="details" rows="5" placeholder="Manufacturer, package, date code, condition, delivery city and documentation requirements"></textarea><button class="btn full" type="submit">Send RFQ for manual review</button><p class="small full" id="rfq-msg" role="status" aria-live="polite"></p><p class="small full">No automatic quote is issued. A reviewer checks the request, supplier evidence and commercial fit before follow-up.</p><script src="/js/rfq.js" defer></script></form>'''
+    return '''<form class="form" id="rfq-form" method="POST" action="/api/rfq" novalidate><input name="part_number" aria-label="Part Number" placeholder="Part Number *" required><input name="manufacturer" aria-label="Manufacturer" placeholder="Manufacturer"><input name="quantity" aria-label="Quantity" placeholder="Quantity *" required><select name="acceptable_condition" aria-label="Acceptable Condition"><option value="Any">Acceptable Condition: Any / Flexible</option><option value="New">New Original</option><option value="NOS">NOS (New Old Stock)</option><option value="Refurbished">Refurbished</option><option value="Pulled">Pulled / Used</option><option value="Alternative">Alternative / Cross Reference</option></select><input name="target_price" aria-label="Target Price" placeholder="Target Price (Optional)"><input name="delivery_country" aria-label="Delivery Country" placeholder="Delivery Country *" required><input name="company" aria-label="Company" placeholder="Company Name"><input name="name" aria-label="Contact Name" placeholder="Contact Name *"><input name="contact" aria-label="Email or WhatsApp" placeholder="Email / WhatsApp *" required><textarea class="full" name="details" rows="4" placeholder="Additional Requirements (packaging, date code, target delivery date, inspection)"></textarea><button class="btn full" type="submit">SUBMIT SOURCING REQUEST</button><p class="small full" id="rfq-msg" role="status" aria-live="polite"></p><p class="small full">Submit your sourcing requirements. Our team searches global inventory and verified channels to follow up privately.</p><script src="/js/rfq.js" defer></script></form>'''
 
 def home():
     body = '''<main><section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><div class="eyebrow">Vietnam electronics sourcing</div><h1>Find components and factory supply with a traceable RFQ.</h1><p>For factories, EMS teams, repair businesses and procurement buyers sourcing ICs, power modules, industrial boards, server parts and verified surplus in Vietnam.</p><div class="actions"><a class="btn" href="/rfq/">Submit part numbers</a><a class="btn alt" href="/suppliers/">List supplier inventory</a></div></div><aside class="signal"><span>Structured intake for</span><b>Part numbers</b><span>Manufacturer · Quantity · Date code · Packaging · Delivery</span><hr><span>Human review before supplier introduction</span></aside></div></section><div class="trust"><div class="wrap"><span>✓ Evidence-first sourcing</span><span>✓ Vietnam supplier discovery</span><span>✓ BOM & alternative review</span><span>✓ Buyer-controlled approval</span></div></div><section class="soft"><div class="wrap"><h2>Focused sourcing lanes</h2><p class="lead">Start with a category or send a structured RFQ. Every inquiry retains the original manufacturer and part-number requirements.</p>''' + card_grid() + '''</div></section><section><div class="wrap split"><div><h2>A clearer path from requirement to supplier</h2><p class="lead">The platform organizes evidence before introducing inventory, reducing incomplete quotes and mismatched parts.</p><div class="steps"><div class="step"><h3>Submit requirement</h3><p>Part number, manufacturer, quantity, package, target date and destination.</p></div><div class="step"><h3>Review evidence</h3><p>Photos, labels, lot/date code, packaging, test reports and supplier identity where available.</p></div><div class="step"><h3>Confirm commercial fit</h3><p>Buyer approves condition, documentation, inspection and transaction terms.</p></div></div></div><aside class="panel"><span class="eyebrow">Risk controls</span><h2>Not a blind parts marketplace.</h2><div class="check">No claim of authenticity without evidence</div><div class="check">No automatic substitute approval</div><div class="check">No hidden change to buyer specifications</div><div class="check">Independent inspection encouraged</div></aside></div></section><section class="soft"><div class="wrap"><h2>Manufacturing regions</h2><p class="lead">Use regional pages to identify the right electronics cluster and logistics route.</p><div class="grid"><article class="card"><h3>Bac Ninh</h3><p>Electronics manufacturing, suppliers and factory inventory.</p><a href="/cities/bac-ninh/">Explore Bac Ninh →</a></article><article class="card"><h3>Hanoi</h3><p>Engineering, distribution and northern Vietnam procurement.</p><a href="/cities/hanoi/">Explore Hanoi →</a></article><article class="card"><h3>Ho Chi Minh City</h3><p>Distribution, repair, trading and southern industrial demand.</p><a href="/cities/ho-chi-minh-city/">Explore HCMC →</a></article></div></div></section><section><div class="wrap cta"><h2>Have a part number, BOM or factory inventory list?</h2><a class="btn" href="/rfq/">Start a structured review</a></div></section></main>'''
@@ -331,40 +331,42 @@ def daily_dashboard_page():
     canonical = f"{DOMAIN}/daily/"
     cards = ""
     for c in CHIPS:
-        cards += f'''<article class="card" style="border-top:4px solid #0757d9">
-          <span class="tag">{escape(c["group"])}</span>
-          <h3 style="margin:8px 0 4px"><a href="/chip/{c['slug']}/">{escape(c["name"])}</a></h3>
-          <p style="font-size:0.85rem;color:#0757d9;font-weight:700">Hãng sản xuất: {escape(c["maker"])}</p>
-          <p style="font-size:0.88rem;margin:8px 0"><strong>Khả năng cung ứng:</strong> {escape(c["supply"])}</p>
-          <p style="font-size:0.84rem;color:#556677"><strong>Ứng dụng kỹ thuật:</strong> {escape(c["usage"][:130])}...</p>
-          <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center">
-            <span class="small" style="color:#0a7d3c;font-weight:700">✓ {escape(c["status"][:40])}</span>
-            <a class="btn" href="/rfq/?part={c['slug']}" style="padding:6px 12px;font-size:0.8rem">Gửi RFQ →</a>
+        cards += f'''<article class="card" style="border-top:4px solid #0757d9;display:flex;flex-direction:column;justify-content:space-between">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <span class="tag" style="font-weight:800">{escape(c["maker"])}</span>
+              <span style="font-size:0.75rem;background:#eef5ff;color:#0757d9;padding:2px 8px;border-radius:4px;font-weight:700">{escape(c["group"])}</span>
+            </div>
+            <h3 style="margin:4px 0 8px;font-size:1.3rem"><a href="/chip/{c['slug']}/">{escape(c["name"])}</a></h3>
+            <p style="font-size:0.88rem;color:#4a5568;margin:4px 0"><strong>Key Specification:</strong> {escape(c["summary"])}</p>
+            <p style="font-size:0.85rem;color:#2d3748;margin:8px 0;background:#f8fafc;padding:10px;border-radius:8px;border-left:3px solid #0757d9">
+              <strong>Why We Are Watching:</strong> VietChipHub is actively monitoring global supply availability, sourcing channels, and market signals for this part number.
+            </p>
+            <div style="margin:10px 0;font-size:0.82rem;color:#4a5568">
+              <strong>Sourcing Options:</strong><br>
+              <span style="display:inline-block;margin-top:4px">☑ New &nbsp;&nbsp; ☑ NOS &nbsp;&nbsp; ☑ Refurbished &nbsp;&nbsp; ☑ Pulled / Used &nbsp;&nbsp; ☑ Alternative</span>
+            </div>
+          </div>
+          <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+            <a class="btn" href="/rfq/?part={c['slug']}" style="flex:1;padding:10px 12px;font-size:0.82rem;text-align:center">REQUEST QUOTE</a>
+            <a class="btn alt" href="/chip/{c['slug']}/" style="flex:1;padding:10px 12px;font-size:0.82rem;text-align:center">SOURCE THIS PART</a>
           </div>
         </article>'''
 
     body = f'''<main>
       <section class="pagehero" style="background:linear-gradient(135deg,#061524,#0a325c);color:#fff">
         <div class="wrap">
-          <div class="crumb" style="color:#90b0d0"><a href="/" style="color:#90b0d0">Trang chủ</a> / Daily Inspection Dashboard</div>
-          <span class="eyebrow" style="color:#77e3ea">VietChipHub Daily Operations & Shortage Supply Dashboard</span>
-          <h1 style="color:#fff">Bảng kiểm tra Daily & Tổng hợp Nhu cầu / Cung ứng缺货</h1>
-          <p style="color:#d0e2f5">Cập nhật tự động mỗi ngày (Daily Operations Audit: {date.today().isoformat()}). Tự động kiểm tra HTTP 200, SEO/AEO, Cloudflare D1 RFQ và cập nhật danh mục linh kiện thiếu hàng.</p>
-          <div class="trust" style="border:none;padding:10px 0 0;color:#77e3ea">
-            <div class="wrap" style="padding:0">
-              <span>✓ System SCORE: 98 / 100</span>
-              <span>✓ Total Generated Pages: 107+</span>
-              <span>✓ Sitemap Index: 101+ URLs</span>
-              <span>✓ D1 Database: Active (vietchiphub_rfq)</span>
-            </div>
-          </div>
+          <div class="crumb" style="color:#90b0d0"><a href="/" style="color:#90b0d0">Home</a> / Today's Focus Parts</div>
+          <span class="eyebrow" style="color:#77e3ea">Global Sourcing & Market Availability Monitoring</span>
+          <h1 style="color:#fff">Today's Focus Parts</h1>
+          <p style="color:#d0e2f5">VietChipHub is monitoring global supply and market availability for these selected electronic component part numbers. (Updated: {date.today().isoformat()})</p>
         </div>
       </section>
       
       <section>
         <div class="wrap">
-          <h2>🔥 每日上传热点缺货型号 & 供应能力 (Daily Shortage Supply Feed)</h2>
-          <p class="lead">Dưới đây là danh sách linh kiện điện tử, IGBT, MCU, module 4G và IC nguồn đang được tìm mua nhiều nhất tại Việt Nam. Tất cả đều đã có trang dữ liệu và hỗ trợ rà soát cung ứng.</p>
+          <h2>Monitored Component Part Numbers ({len(CHIPS)} Parts)</h2>
+          <p class="lead">Need any of these part numbers? Tell us your required quantity, acceptable condition and delivery country. We search global inventory and sourcing channels for you.</p>
           <div class="grid">{cards}</div>
         </div>
       </section>
@@ -372,57 +374,34 @@ def daily_dashboard_page():
       <section class="soft">
         <div class="wrap split">
           <div>
-            <h2>📋 当前活跃买家询盘 (Active Buyer RFQ Leads)</h2>
-            <p class="lead">Dữ liệu RFQ thực tế được lưu trữ an toàn trong Cloudflare D1 Database (không xoá, không ghi đè dữ liệu gốc):</p>
-            <div style="overflow:auto">
-              <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.06);font-size:0.9rem">
-                <thead>
-                  <tr style="background:#0757d9;color:#fff;text-align:left">
-                    <th style="padding:10px">ID</th>
-                    <th style="padding:10px">Công ty (Buyer)</th>
-                    <th style="padding:10px">Contact</th>
-                    <th style="padding:10px">Mã linh kiện (Part)</th>
-                    <th style="padding:10px">Số lượng</th>
-                    <th style="padding:10px">Giá mục tiêu</th>
-                    <th style="padding:10px">Trạng thái</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="border-bottom:1px solid #eef2f7">
-                    <td style="padding:10px"><b>8</b></td>
-                    <td style="padding:10px">NAV ENGINEERING</td>
-                    <td style="padding:10px">ned.georgiev@nav-engineering.com</td>
-                    <td style="padding:10px"><b>213851-1</b></td>
-                    <td style="padding:10px">600 pcs</td>
-                    <td style="padding:10px">Market quote</td>
-                    <td style="padding:10px"><span style="background:#e8f5e9;color:#2e7d32;padding:4px 8px;border-radius:6px;font-weight:700">NEW (Urgent 4-6d)</span></td>
-                  </tr>
-                  <tr style="border-bottom:1px solid #eef2f7">
-                    <td style="padding:10px"><b>7</b></td>
-                    <td style="padding:10px">KMO</td>
-                    <td style="padding:10px">jazu365@naver.com</td>
-                    <td style="padding:10px"><b>XFL4020-102MEC</b></td>
-                    <td style="padding:10px">30,000 pcs</td>
-                    <td style="padding:10px"><b>$0.40 / pc</b></td>
-                    <td style="padding:10px"><span style="background:#e8f5e9;color:#2e7d32;padding:4px 8px;border-radius:6px;font-weight:700">NEW (DC 26+)</span></td>
-                  </tr>
-                </tbody>
-              </table>
+            <h2>How VietChipHub Sourcing Works</h2>
+            <p class="lead">Submit your requirement privately. We verify manufacturer specifications and search qualified inventory channels before follow-up.</p>
+            <div class="steps">
+              <div class="step">
+                <h3>Submit Requirement</h3>
+                <p>Part number, quantity, acceptable condition, target date and delivery country.</p>
+              </div>
+              <div class="step">
+                <h3>Global Sourcing Search</h3>
+                <p>We check verified distributor stock, factory surplus, and qualified global channels.</p>
+              </div>
+              <div class="step">
+                <h3>Private Review & Quote</h3>
+                <p>Our team verifies part details, lot/date codes and evidence before providing a commercial quotation.</p>
+              </div>
             </div>
           </div>
           <aside class="panel">
-            <span class="eyebrow">Inspection Checklist</span>
-            <h2>Quy trình kiểm tra hàng ngày</h2>
-            <div class="check">Kiểm tra 100% liên kết (0 Dead Links)</div>
-            <div class="check">Kiểm tra HTTP 200 & SSL Certificate</div>
-            <div class="check">Cập nhật Schema SearchAction & SEO/AEO</div>
-            <div class="check">Tự động đẩy code Git main & CF Pages Deploy</div>
+            <span class="eyebrow">Sourcing Request</span>
+            <h2>Need a Specific Part?</h2>
+            <p>Tell us what part numbers you need. We review requirements privately and match with verified supply.</p>
+            <a class="btn" href="/rfq/" style="margin-top:12px;display:inline-block">Submit Sourcing Request</a>
           </aside>
         </div>
       </section>
     </main>'''
     
-    return shell(f"Bảng kiểm tra daily & Nhu cầu/Cung ứng缺货 | {date.today().isoformat()}", "Bảng kiểm tra tự động hàng ngày cho VietChipHub: cập nhật danh mục linh kiện thiếu hàng, khả năng cung ứng và RFQ mua hàng.", "daily", body)
+    return shell(f"Today's Focus Parts | VietChipHub Sourcing", "VietChipHub is monitoring global supply and market availability for selected electronic component part numbers. Submit sourcing requests for manual review.", "daily", body)
 
 def detail(path,title,desc,heading):
     if path == "rfq":

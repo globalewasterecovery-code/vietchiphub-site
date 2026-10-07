@@ -1,0 +1,37 @@
+{
+  "routes": [
+    {
+      "routePath": "/api/rfqs/:id",
+      "mountPath": "/api/rfqs",
+      "method": "PATCH",
+      "module": [
+        "api/rfqs/[id].js:onRequestPatch"
+      ]
+    },
+    {
+      "routePath": "/api/health",
+      "mountPath": "/api",
+      "method": "GET",
+      "module": [
+        "api/health.js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/rfq",
+      "mountPath": "/api",
+      "method": "POST",
+      "module": [
+        "api/rfq.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/api/rfqs",
+      "mountPath": "/api",
+      "method": "GET",
+      "module": [
+        "api/rfqs.js:onRequestGet"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}

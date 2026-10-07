@@ -1,0 +1,15 @@
+=== staged ===
+public/bo-nho/index.html
+public/bo-nho/mlcc-eol-tang-gia-4q26-2026/index.html
+public/sitemap.xml
+public/social/2026-09-15-mlcc-eol-4q26.md
+[main 53617bc] news(vi): MLCC EOL across 9 Murata series + 4Q26 price hikes - procurement checklist
+ 4 files changed, 29 insertions(+), 1 deletion(-)
+ create mode 100644 public/bo-nho/mlcc-eol-tang-gia-4q26-2026/index.html
+ create mode 100644 public/social/2026-09-15-mlcc-eol-4q26.md
+From https://github.com/globalewasterecovery-code/vietchiphub-site
+ * branch            main       -> FETCH_HEAD
+local=53617bc23b82533fb6c86cfe5911ad8eb048150c remote=8e8eddc782e134a045b3038eedb59db2b1eea5b0
+To https://github.com/globalewasterecovery-code/vietchiphub-site.git
+   8e8eddc..53617bc  HEAD -> main
+add_exit=0 commit_exit=0 push_exit=0

@@ -1,0 +1,52 @@
+{
+  "steps": [
+    {
+      "name": "git_add",
+      "code": 0,
+      "out": "",
+      "err": ""
+    },
+    {
+      "name": "git_commit",
+      "code": 0,
+      "out": "[main 3d032ba] news(vi): Samsung DRAM+NAND 7-10% price hike - Vietnam buyer BOM/price-lock checklist\n 3 files changed, 3 insertions(+), 2 deletions(-)\n create mode 100644 public/bo-nho/samsung-tang-gia-dram-nand-7-10-2026/index.html",
+      "err": ""
+    },
+    {
+      "name": "git_push",
+      "code": 0,
+      "out": "",
+      "err": "To https://github.com/globalewasterecovery-code/vietchiphub-site.git\n   53617bc..3d032ba  main -> main"
+    },
+    {
+      "name": "deploy",
+      "code": 0,
+      "out": "⛅️ wrangler 4.132.0\n────────────────────\n✨ Compiled Worker successfully\nUploading... (113/117)\nUploading... (115/117)\nUploading... (116/117)\nUploading... (117/117)\n✨ Success! Uploaded 4 files (113 already uploaded) (2.09 sec)\n\n✨ Uploading Functions bundle\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://b0a64e00.vietchiphub-site.pages.dev",
+      "err": "\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mWarning: Your working directory is a git repo and has uncommitted changes\u001b[0m\n\n  To silence this warning, pass in --commit-dirty=true"
+    },
+    {
+      "name": "verify_article_http",
+      "code": 0,
+      "out": "200",
+      "err": ""
+    },
+    {
+      "name": "verify_sitemap_http",
+      "code": 0,
+      "out": "200",
+      "err": ""
+    },
+    {
+      "name": "verify_health",
+      "code": 0,
+      "out": "{\"ok\":true,\"db\":\"vietchiphub_rfq\"}",
+      "err": ""
+    }
+  ],
+  "ok": true,
+  "local_checks": "pass",
+  "article_http": "200",
+  "sitemap_http": "200",
+  "sitemap_contains_new_url": true,
+  "health": "{\"ok\":true,\"db\":\"vietchiphub_rfq\"}"
+}

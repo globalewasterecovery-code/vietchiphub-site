@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-16",
+  "slug": "samsung-tang-gia-dram-nand-7-10-2026",
+  "page_url": "https://vietchiphub.com/bo-nho/samsung-tang-gia-dram-nand-7-10-2026/",
+  "source_url": "https://en.shiftdelete.net/samsung-prepares-7-10-price-hike-on-dram-and-nand-memory/",
+  "deploy_ok": false,
+  "verify": {
+    "steps": [
+      {
+        "name": "git_add",
+        "code": 0,
+        "out": "",
+        "err": ""
+      },
+      {
+        "name": "git_commit",
+        "code": 1,
+        "out": "09-15.md\n\tmemory/_article_20260916.html\n\tmemory/_commit_push_result.txt\n\tmemory/_deploy_verify_result.json\n\tmemory/_deploy_verify_result_20260916.json\n\tmemory/_gen_report_20260916.json\n\tmemory/_pub_out_20260916.txt\n\tmemory/failures/safe_git_push-20260828-090554.log\n\tpublic/js/rfq.js\n\tpublic/js/staff.js\n\tpublic/staff/\n\twrangler.toml\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")",
+        "err": ""
+      },
+      {
+        "name": "git_push",
+        "code": 0,
+        "out": "",
+        "err": "Everything up-to-date"
+      },
+      {
+        "name": "deploy",
+        "code": 0,
+        "out": "⛅️ wrangler 4.132.0\n────────────────────\n✨ Compiled Worker successfully\nUploading... (117/117)\n✨ Success! Uploaded 0 files (117 already uploaded) (1.27 sec)\n\n✨ Uploading Functions bundle\n🌎 Deploying...\n✨ Deployment complete! Take a peek over at https://9b0623a3.vietchiphub-site.pages.dev",
+        "err": "\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mWarning: Your working directory is a git repo and has uncommitted changes\u001b[0m\n\n  To silence this warning, pass in --commit-dirty=true"
+      },
+      {
+        "name": "verify_article_http",
+        "code": 0,
+        "out": "200",
+        "err": ""
+      },
+      {
+        "name": "verify_sitemap_http",
+        "code": 0,
+        "out": "200",
+        "err": ""
+      },
+      {
+        "name": "verify_health",
+        "code": 0,
+        "out": "{\"ok\":true,\"db\":\"vietchiphub_rfq\"}",
+        "err": ""
+      }
+    ],
+    "ok": false,
+    "local_checks": "pass",
+    "article_http": "200",
+    "sitemap_http": "200",
+    "sitemap_contains_new_url": true,
+    "health": "{\"ok\":true,\"db\":\"vietchiphub_rfq\"}"
+  }
+}
