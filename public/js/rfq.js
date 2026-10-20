@@ -30,12 +30,15 @@
     form.elements.details.value = 'Category: ' + catVal;
   }
 
+  let requestKey = crypto.randomUUID();
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (!form.reportValidity()) return;
     const button = form.querySelector('button[type="submit"]');
     const data = new FormData(form);
     data.set('language', lang);
     const payload = Object.fromEntries(data.entries());
+    payload.request_key = requestKey;
     if (!payload.contact || !payload.part_number) {
       if (msg) {
         msg.textContent = text.err;
@@ -56,12 +59,15 @@
       const result = await response.json();
       if (!response.ok || !result.ok) throw new Error(result.error || 'submit_failed');
       form.reset();
+      requestKey = crypto.randomUUID();
+      window.siteEvent?.('form_success');
       if (msg) {
-        msg.textContent = text.ok;
+        msg.textContent = text.ok + ' #' + result.id;
         msg.style.color = '#0a7d3c';
         msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     } catch (error) {
+      window.siteEvent?.('form_error');
       if (msg) {
         msg.textContent = text.err;
         msg.style.color = '#b3261e';

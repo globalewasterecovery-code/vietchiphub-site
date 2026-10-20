@@ -31,7 +31,7 @@ export async function onRequestPost({request, env}) {
   const requestKey=clean(raw.request_key,100) || crypto.randomUUID();
   if (!/^[a-zA-Z0-9_-]{8,100}$/.test(requestKey)) return reply({ok:false,error:'bad_request_key'},400);
   const language=choice(raw.language,['vi','en','zh'],'vi');
-  const details=[raw.manufacturer && `Requested manufacturer: ${clean(raw.manufacturer)}`,raw.name && `Contact name: ${clean(raw.name)}`,clean(raw.details || raw.additional_requirements,10000)].filter(Boolean).join('\n');
+  const details=[raw.manufacturer && `Requested manufacturer: ${clean(raw.manufacturer)}`,raw.name && `Contact name: ${clean(raw.name)}`,raw.inquiry_type && `Inquiry type: ${clean(raw.inquiry_type,80)}`,raw.supply_relationship && `Supply relationship (unverified): ${clean(raw.supply_relationship,300)}`,clean(raw.details || raw.additional_requirements,10000)].filter(Boolean).join('\n');
   const condition=choice(raw.item_condition,['NEW','USED_TESTED','REFURBISHED','UNKNOWN'],'UNKNOWN');
   const tax=choice(raw.tax_basis,['INCLUDED','EXCLUDED','UNKNOWN'],'UNKNOWN');
   const isTest=raw.is_test===true || /IS_TEST=TRUE/i.test(details) ? 1 : 0;
