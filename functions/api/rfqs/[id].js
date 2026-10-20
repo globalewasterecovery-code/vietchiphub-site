@@ -41,3 +41,13 @@ export async function onRequestPatch({ request, env, params }) {
     return json({ ok: false, error: 'server_error', message: String(error && error.message || error) }, 500);
   }
 }
+
+export async function onRequestGet({request,env,params}) {
+  if (!authorized(request,env)) return json({ok:false,error:'unauthorized'},401);
+  const id=Number(params.id);
+  if(!Number.isSafeInteger(id)||id<1)return json({ok:false,error:'bad_id'},400);
+  try {
+    const row=await env.vietchiphub_rfq.prepare('SELECT * FROM vietchiphub_rfqs WHERE id=?').bind(id).first();
+    return row?json({ok:true,row}):json({ok:false,error:'not_found'},404);
+  } catch {return json({ok:false,error:'read_failed'},503);}
+}
